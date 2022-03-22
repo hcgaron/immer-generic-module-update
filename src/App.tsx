@@ -49,7 +49,6 @@ function App() {
     recipe: updateStateFunction<IADCScopedSBTState>
   ) {
     const newState = produce(state, recipe);
-    debugger;
     dispatch(createUpdateSBTStateAction(newState));
   }
 
