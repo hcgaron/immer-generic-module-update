@@ -1,7 +1,8 @@
 import { useReducer } from "react";
 import "./App.css";
 import { SBT } from "./SBT";
-import { produce, Draft, castDraft } from "immer";
+import { produce, Draft } from "immer";
+import { JSONTree } from "react-json-tree";
 
 enum ActionTypes {
   UpdateSBTState,

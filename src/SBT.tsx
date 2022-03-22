@@ -1,4 +1,5 @@
 import { ChangeEvent, FormEvent, useEffect } from "react";
+import { JSONTree } from "react-json-tree";
 import { IADCScopedSBTState, updateStateFunction } from "./App";
 
 interface ISBTState extends IADCScopedSBTState {
@@ -6,6 +7,7 @@ interface ISBTState extends IADCScopedSBTState {
     textInputOne: string;
     arrayOne: number[];
     textInputTwo: string;
+    textInputOneDivVisible: boolean;
   };
   sceneTwo: {
     textInputOne: string;
@@ -26,6 +28,7 @@ const initialState: ISBTState = {
     textInputOne: "",
     arrayOne: [],
     textInputTwo: "",
+    textInputOneDivVisible: false,
   },
   sceneTwo: {
     textInputOne: "",
@@ -55,7 +58,7 @@ export function SBT({ updateState, state }: SBTProps) {
     });
   }
 
-  return (
+  return state.sceneOne ? (
     <div style={{ padding: "1rem" }}>
       <p>
         Cool I'm an SBT.{" "}
@@ -67,11 +70,48 @@ export function SBT({ updateState, state }: SBTProps) {
         </button>
         to push to the array in state.
       </p>
-      <div>
+      <div style={{ position: "relative" }}>
         <p>
           Below is a fully controlled text input. Typing in this input will
-          update state.sceneOne.textInputOne
+          update{" "}
+          <span
+            onMouseEnter={() =>
+              updateState((draft) => {
+                draft.sceneOne.textInputOneDivVisible = true;
+              })
+            }
+            onMouseLeave={() =>
+              updateState((draft) => {
+                draft.sceneOne.textInputOneDivVisible = false;
+              })
+            }
+            style={{
+              fontFamily: "monospace",
+              border: "1px solid #aaa",
+              backgroundColor: "#ccc",
+              padding: ".2rem",
+              userSelect: "none",
+              cursor: "pointer",
+            }}
+          >
+            state.sceneOne.textInputOne.
+          </span>
         </p>
+        <p>
+          Try hovering over the above code snippet to see the current state.
+        </p>
+        <div
+          style={{
+            position: "absolute",
+            top: "25%",
+            right: "25%",
+            fontFamily: "monospace",
+            padding: "1rem",
+            display: state.sceneOne.textInputOneDivVisible ? "block" : "none",
+          }}
+        >
+          <JSONTree data={state} shouldExpandNode={() => true} />
+        </div>
         <input
           type="text"
           name="text-input-one"
@@ -90,5 +130,5 @@ export function SBT({ updateState, state }: SBTProps) {
         </ul>
       </div>
     </div>
-  );
+  ) : null;
 }
