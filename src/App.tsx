@@ -40,7 +40,6 @@ const initialState = {};
 export type updateStateFunction<T> = (
   recipe: (draft: Draft<T>) => void
 ) => void;
-// export type updateStateFunction<T> = (fn: (draft: Draft<T>) => WriteableDraft<T>) => void;
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
