@@ -57,7 +57,7 @@ export function SBT({ updateState, state }: SBTProps) {
 
   return (
     <div style={{ padding: "1rem" }}>
-      <div style={{ marginBottom: "1rem" }}>
+      <p>
         Cool I'm an SBT.{" "}
         <button
           onClick={handleButtonClick}
@@ -66,8 +66,12 @@ export function SBT({ updateState, state }: SBTProps) {
           Click this button
         </button>
         to push to the array in state.
-      </div>
+      </p>
       <div>
+        <p>
+          Below is a fully controlled text input. Typing in this input will
+          update state.sceneOne.textInputOne
+        </p>
         <input
           type="text"
           name="text-input-one"
@@ -78,7 +82,7 @@ export function SBT({ updateState, state }: SBTProps) {
         />
       </div>
       <div>
-        <span>Below you will see any of the entries in our state array</span>
+        <p>Below you will see any of the entries in our state array</p>
         <ul>
           {state?.sceneOne?.arrayOne?.map((entry, index) => (
             <li key={index}>{entry}</li>
